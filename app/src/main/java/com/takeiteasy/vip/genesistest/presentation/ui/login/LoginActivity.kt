@@ -1,17 +1,21 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.login
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import com.takeiteasy.vip.genesistest.R
+import com.takeiteasy.vip.genesistest.presentation.common.BaseActivity
+import com.takeiteasy.vip.genesistest.presentation.router.ActivityRouter
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity(), LoginContract.LoginView {
+class LoginActivity : BaseActivity(), LoginContract.LoginView {
 
     @Inject
     lateinit var presenter: LoginContract.LoginPresenter
+    @Inject
+    lateinit var router: ActivityRouter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -20,7 +24,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.LoginView {
 
         presenter.attachView(this)
 
-        presenter.registerLoginCallback()
+        presenter.checkLoginState()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -34,18 +38,23 @@ class LoginActivity : AppCompatActivity(), LoginContract.LoginView {
     }
 
     override fun loginSuccess() {
-        Log.d("TAG", "loginSuccess(): ")
+        router.startMoviesActivity(this)
+        finish()
     }
 
     override fun loginFailure() {
-        Log.d("TAG", "loginFailure(): ")
+        presenter.registerLoginCallback()
     }
 
     override fun showProgress(show: Boolean) {
-
+        if (show) {
+            progress.visibility = View.VISIBLE
+        } else {
+            progress.visibility = View.GONE
+        }
     }
 
     override fun showError(error: String) {
-        Log.d("TAG", "showError(): $error")
+        displayMessageToast(error)
     }
 }

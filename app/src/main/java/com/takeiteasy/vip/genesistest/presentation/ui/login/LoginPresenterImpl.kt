@@ -8,18 +8,20 @@ import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 
 class LoginPresenterImpl (
-        private val loginUseCase: LoginUseCase
+        private val useCase: LoginUseCase
 ) : Presenter<LoginContract.LoginView>(), LoginContract.LoginPresenter {
 
     override fun handleResult(requestCode: Int, resultCode: Int, data: Intent) {
-        loginUseCase.handleResult(requestCode, resultCode, data)
+        useCase.handleResult(requestCode, resultCode, data)
     }
 
     override fun checkLoginState() {
         disposable.add(
-                loginUseCase.isLoggedIn()
+                useCase.isLoggedIn()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe { getView()?.showProgress(true) }
+                        .doFinally { getView()?.showProgress(false) }
                         .subscribe {b: Boolean ->
                             if (b) {
                                 getView()?.loginSuccess()
@@ -32,11 +34,9 @@ class LoginPresenterImpl (
 
     override fun registerLoginCallback() {
         disposable.add(
-                loginUseCase.registerCallback()
+                useCase.registerCallback()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSubscribe { getView()?.showProgress(true) }
-                        .doFinally { getView()?.showProgress(false) }
                         .subscribeWith(object : DisposableCompletableObserver() {
                             override fun onComplete() {
                                 getView()?.loginSuccess()
@@ -45,7 +45,6 @@ class LoginPresenterImpl (
 
                             override fun onError(e: Throwable) {
                                 getView()?.showError(e.localizedMessage)
-                                getView()?.loginFailure()
                             }
 
                         })

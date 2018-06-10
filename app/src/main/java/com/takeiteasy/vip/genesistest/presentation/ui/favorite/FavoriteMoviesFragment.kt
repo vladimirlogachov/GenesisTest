@@ -1,7 +1,5 @@
-package com.takeiteasy.vip.genesistest.presentation.ui.movie.favorite
+package com.takeiteasy.vip.genesistest.presentation.ui.favorite
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
