@@ -1,17 +1,54 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.login
 
-import com.facebook.Profile
-import com.facebook.login.LoginResult
+import android.content.Intent
+import com.takeiteasy.vip.genesistest.domain.usecase.LoginUseCase
 import com.takeiteasy.vip.genesistest.presentation.mvp.Presenter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableCompletableObserver
+import io.reactivex.schedulers.Schedulers
 
-class LoginPresenterImpl : Presenter<LoginContract.LoginIView>(), LoginContract.LoginPresenter {
+class LoginPresenterImpl (
+        private val loginUseCase: LoginUseCase
+) : Presenter<LoginContract.LoginView>(), LoginContract.LoginPresenter {
 
+    override fun handleResult(requestCode: Int, resultCode: Int, data: Intent) {
+        loginUseCase.handleResult(requestCode, resultCode, data)
+    }
 
-    override fun isLoggedIn(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun checkLoginState() {
+        disposable.add(
+                loginUseCase.isLoggedIn()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {b: Boolean ->
+                            if (b) {
+                                getView()?.loginSuccess()
+                            } else {
+                                getView()?.loginFailure()
+                            }
+                        }
+        )
     }
 
     override fun registerLoginCallback() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        disposable.add(
+                loginUseCase.registerCallback()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe { getView()?.showProgress(true) }
+                        .doFinally { getView()?.showProgress(false) }
+                        .subscribeWith(object : DisposableCompletableObserver() {
+                            override fun onComplete() {
+                                getView()?.loginSuccess()
+                            }
+
+
+                            override fun onError(e: Throwable) {
+                                getView()?.showError(e.localizedMessage)
+                                getView()?.loginFailure()
+                            }
+
+                        })
+        )
     }
 }
