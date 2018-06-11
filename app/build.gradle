@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key'
+            keyPassword 'Key0110'
+            storeFile file('../key/key.jks')
+            storePassword 'Key0110'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.takeiteasy.vip.genesistest"
@@ -21,11 +29,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        buildTypes.each {
+            it.signingConfig = signingConfigs.config
+        }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:animated-vector-drawable:27.1.1'
@@ -37,29 +48,36 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     // RxJava
     implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion") {
         exclude module: 'okhttp'
     }
+
     // Retrofit
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
     // Dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
     //Facebook
     implementation "com.facebook.android:facebook-android-sdk:$facebookVersion"
+
     // Room
     implementation "android.arch.persistence.room:runtime:$androidArchVersion"
     implementation "android.arch.persistence.room:rxjava2:$androidArchVersion"

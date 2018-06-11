@@ -40,7 +40,9 @@ class LoginRepositoryImpl(
                     }
 
                     override fun onError(error: FacebookException?) {
-                        error?.let { emitter.onError(it) }
+                        if (!emitter.isDisposed) {
+                            error?.let { emitter.onError(it) }
+                        }
                     }
 
                 })
