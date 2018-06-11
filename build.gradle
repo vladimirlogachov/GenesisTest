@@ -35,6 +35,9 @@ allprojects {
 ext {
     facebookAppId = '2099718423608731'
     fbLoginProtocolScheme = 'fb2099718423608731'
+    moviesDbV3ApiKey = 'd6a0aec484d69317c3a65b19984f357b'
+    moviesDbBaseUrl = 'https://api.themoviedb.org/3/'
+    moviesImageDbBaseUrl = 'https://image.tmdb.org/t/p/w500'
 }
 
 task clean(type: Delete) {

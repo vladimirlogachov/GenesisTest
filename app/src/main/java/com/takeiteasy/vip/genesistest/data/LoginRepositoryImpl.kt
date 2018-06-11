@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.data.repository
+package com.takeiteasy.vip.genesistest.data
 
 import android.content.Intent
 import com.facebook.CallbackManager

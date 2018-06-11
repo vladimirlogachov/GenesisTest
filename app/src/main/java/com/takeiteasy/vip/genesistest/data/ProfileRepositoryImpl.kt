@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.data.repository
+package com.takeiteasy.vip.genesistest.data
 
 import com.facebook.Profile
 import com.takeiteasy.vip.genesistest.domain.repository.ProfileRepository

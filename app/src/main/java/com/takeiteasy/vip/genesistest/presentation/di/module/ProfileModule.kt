@@ -1,8 +1,8 @@
 package com.takeiteasy.vip.genesistest.presentation.di.module
 
-import com.takeiteasy.vip.genesistest.data.repository.ProfileRepositoryImpl
+import com.takeiteasy.vip.genesistest.data.ProfileRepositoryImpl
 import com.takeiteasy.vip.genesistest.domain.repository.ProfileRepository
-import com.takeiteasy.vip.genesistest.domain.usecase.LoadProfileUseCase
+import com.takeiteasy.vip.genesistest.domain.usecase.ProfileUseCase
 import com.takeiteasy.vip.genesistest.presentation.ui.movie.ProfileContract
 import com.takeiteasy.vip.genesistest.presentation.ui.movie.ProfilePresenterImpl
 import dagger.Module
@@ -16,12 +16,12 @@ class ProfileModule {
     }
 
     @Provides
-    fun provideLoadProfileUseCase(repository: ProfileRepository): LoadProfileUseCase {
-        return LoadProfileUseCase(repository)
+    fun provideLoadProfileUseCase(repository: ProfileRepository): ProfileUseCase {
+        return ProfileUseCase(repository)
     }
 
     @Provides
-    fun provideProfilePresenter(useCase: LoadProfileUseCase): ProfileContract.ProfilePresenter {
+    fun provideProfilePresenter(useCase: ProfileUseCase): ProfileContract.ProfilePresenter {
         return ProfilePresenterImpl(useCase)
     }
 }

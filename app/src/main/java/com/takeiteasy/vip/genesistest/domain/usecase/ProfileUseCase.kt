@@ -4,7 +4,7 @@ import com.facebook.Profile
 import com.takeiteasy.vip.genesistest.domain.repository.ProfileRepository
 import io.reactivex.Single
 
-class LoadProfileUseCase(
+class ProfileUseCase(
         private val profileRepository: ProfileRepository
 ) {
     fun loadUser(): Single<Profile> = profileRepository.loadUserProfile()

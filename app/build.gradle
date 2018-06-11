@@ -30,6 +30,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         buildTypes.each {
+            it.buildConfigField('String', 'MOVIES_DB_BASE_URL', "\"${rootProject.ext.moviesDbBaseUrl}\"")
+            it.buildConfigField('String', 'MOVIES_DB_V3_API_KEY', "\"${rootProject.ext.moviesDbV3ApiKey}\"")
+            it.buildConfigField('String', 'MOVIES_IMAGE_DB_BASE_URL', "\"${rootProject.ext.moviesImageDbBaseUrl}\"")
+
             it.signingConfig = signingConfigs.config
         }
     }

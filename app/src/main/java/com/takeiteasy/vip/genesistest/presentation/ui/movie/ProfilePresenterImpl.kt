@@ -1,14 +1,14 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.movie
 
 import com.facebook.Profile
-import com.takeiteasy.vip.genesistest.domain.usecase.LoadProfileUseCase
+import com.takeiteasy.vip.genesistest.domain.usecase.ProfileUseCase
 import com.takeiteasy.vip.genesistest.presentation.mvp.Presenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
 class ProfilePresenterImpl(
-      private val useCase: LoadProfileUseCase
+      private val useCase: ProfileUseCase
 ) : Presenter<ProfileContract.ProfileView>(), ProfileContract.ProfilePresenter {
     override fun loadProfile() {
         disposable.add(
