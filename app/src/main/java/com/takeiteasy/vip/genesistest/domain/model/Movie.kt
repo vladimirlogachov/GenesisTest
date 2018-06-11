@@ -2,11 +2,13 @@ package com.takeiteasy.vip.genesistest.domain.model
 
 import com.google.gson.annotations.SerializedName
 import com.takeiteasy.vip.genesistest.BuildConfig
+import java.util.*
 
 data class Movie(
-        private val id: Int,
-        private val title: String,
-        private val overview: String,
+        val id: Int,
+        val title: String,
+        val overview: String,
+        val releaseDate: Date,
         @SerializedName("poster_path")
         private val posterPath: String
 ) {

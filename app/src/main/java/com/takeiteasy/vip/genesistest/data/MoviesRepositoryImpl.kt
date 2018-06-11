@@ -2,10 +2,11 @@ package com.takeiteasy.vip.genesistest.data
 
 import com.takeiteasy.vip.genesistest.domain.api.Api
 import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.domain.model.PagingResponse
+import com.takeiteasy.vip.genesistest.domain.model.PagingData
 import com.takeiteasy.vip.genesistest.domain.repository.MoviesRepository
 import io.reactivex.Completable
 import io.reactivex.Single
+import java.util.*
 
 class MoviesRepositoryImpl(
         private val api: Api
@@ -15,8 +16,8 @@ class MoviesRepositoryImpl(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun loadOngoingMovies(): Single<List<Movie>> {
-        return api.loadOngoingMovies("", "", 1).flatMap { r: PagingResponse<Movie> -> Single.just(r.results) }
+    override fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int): Single<PagingData<Movie>> {
+        return api.loadOngoingMovies(releaseDateGte, releaseDateLte, page)
     }
 
     override fun addMovieToFavorite(movie: Movie): Completable {

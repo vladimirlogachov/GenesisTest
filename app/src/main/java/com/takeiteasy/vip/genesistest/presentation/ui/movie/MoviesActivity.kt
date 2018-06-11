@@ -1,6 +1,7 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.movie
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
@@ -9,12 +10,19 @@ import com.facebook.Profile
 import com.takeiteasy.vip.genesistest.R
 import com.takeiteasy.vip.genesistest.presentation.common.BaseActivity
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 
 import kotlinx.android.synthetic.main.activity_movies.*
 import javax.inject.Inject
+import dagger.android.DispatchingAndroidInjector
 
-class MoviesActivity : BaseActivity(), ProfileContract.ProfileView {
 
+
+class MoviesActivity : BaseActivity(), ProfileContract.ProfileView, HasSupportFragmentInjector {
+
+    @Inject
+    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     lateinit var presenter: ProfileContract.ProfilePresenter
 
@@ -59,5 +67,9 @@ class MoviesActivity : BaseActivity(), ProfileContract.ProfileView {
 
     override fun showError(error: String) {
         displayMessageToast(error)
+    }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return fragmentDispatchingAndroidInjector
     }
 }

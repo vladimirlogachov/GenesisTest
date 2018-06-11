@@ -25,7 +25,6 @@ class ProfilePresenterImpl(
                             override fun onError(e: Throwable) {
                                 getView()?.showError(e.localizedMessage)
                             }
-
                         })
         )
     }
