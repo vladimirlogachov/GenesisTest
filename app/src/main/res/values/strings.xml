@@ -5,6 +5,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_failure">Login failed.</string>
+    <string name="no_data">There is no available data loaded.</string>
+    <string name="share">Share</string>
+    <string name="add_to_favorite">Add to favorite</string>
 
     <array name="PageTitles">
         <item>Ongoing</item>

@@ -15,8 +15,7 @@ import javax.inject.Inject
 class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesView {
 
     companion object {
-        fun newInstance() =
-                OngoingMoviesFragment()
+        fun newInstance() = OngoingMoviesFragment()
     }
 
     @Inject
