@@ -10,8 +10,7 @@ abstract class GenericAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private val data: MutableList<T> = mutableListOf()
 
-    abstract fun provideLayout(viewType: Int): Int
-    abstract fun provideViewHolder(view: View): RecyclerView.ViewHolder
+    abstract fun provideViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
     fun updateData(data: List<T>) {
         val prevSize = data.size
@@ -28,10 +27,10 @@ abstract class GenericAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return provideViewHolder(inflateView(parent, provideLayout(viewType)))
+        return provideViewHolder(parent, viewType)
     }
 
-    private fun inflateView(parent: ViewGroup, @LayoutRes layoutRes: Int): View {
+    fun inflateView(parent: ViewGroup, @LayoutRes layoutRes: Int): View {
         return LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
     }
 
@@ -44,6 +43,12 @@ abstract class GenericAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as? ViewHolderBinder<*>)?.bind(data[position])
+        (holder as? Binder<T>)?.bind(data[position])
     }
+
+    internal interface Binder<T> {
+        fun bind(item: T)
+    }
+
+    protected class EmptyStateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

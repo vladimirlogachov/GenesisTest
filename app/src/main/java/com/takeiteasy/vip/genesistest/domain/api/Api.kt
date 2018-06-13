@@ -9,10 +9,10 @@ import retrofit2.http.Query
 import java.util.*
 
 interface Api {
-    @GET("/discover/movie?language=en-US&api_key=" + BuildConfig.MOVIES_DB_V3_API_KEY)
+    @GET("discover/movie?language=en-US&api_key=" + BuildConfig.MOVIES_DB_V3_API_KEY)
     fun loadOngoingMovies(
-        @Query("primary_release_date.gte") gte: Date,
-        @Query("primary_release_date.lte") lte: Date,
+        @Query("primary_release_date.gte") gte: String,
+        @Query("primary_release_date.lte") lte: String,
         @Query("page") page: Int
     ): Single<PagingData<Movie>>
 }

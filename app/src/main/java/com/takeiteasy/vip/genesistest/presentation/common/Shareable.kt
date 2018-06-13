@@ -1,5 +1,5 @@
 package com.takeiteasy.vip.genesistest.presentation.common
 
-interface ViewHolderBinder<in T> {
-    fun bind(item: T)
+interface Shareable {
+    fun share(text: String)
 }

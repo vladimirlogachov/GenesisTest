@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ui.ongoing.OngoingMoviesFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/ongoing_movies"
+        android:id="@+id/ongoingMovies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -1,6 +1,5 @@
 package com.takeiteasy.vip.genesistest.presentation.di.module
 
-import com.google.gson.Gson
 import com.takeiteasy.vip.genesistest.BuildConfig
 import com.takeiteasy.vip.genesistest.domain.api.Api
 import dagger.Module
@@ -10,8 +9,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import com.google.gson.GsonBuilder
-
 
 
 @Module
@@ -31,18 +28,11 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideGson(): Gson {
-        return GsonBuilder()
-                .setDateFormat("yyyy-MM-dd")
-                .create()
-    }
-
-    @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BuildConfig.MOVIES_DB_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()
     }

@@ -9,7 +9,8 @@ import io.reactivex.Single
 import java.util.*
 
 class MoviesRepositoryImpl(
-        private val api: Api
+        private val api: Api,
+        private val mapper: DateMapper
 ) : MoviesRepository {
 
     override fun saveOngoingMovies(movies: List<Movie>): Completable {
@@ -17,7 +18,7 @@ class MoviesRepositoryImpl(
     }
 
     override fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int): Single<PagingData<Movie>> {
-        return api.loadOngoingMovies(releaseDateGte, releaseDateLte, page)
+        return api.loadOngoingMovies(mapper.toModel(releaseDateGte), mapper.toModel(releaseDateLte), page)
     }
 
     override fun addMovieToFavorite(movie: Movie): Completable {

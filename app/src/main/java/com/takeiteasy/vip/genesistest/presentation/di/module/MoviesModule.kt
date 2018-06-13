@@ -1,5 +1,6 @@
 package com.takeiteasy.vip.genesistest.presentation.di.module
 
+import com.takeiteasy.vip.genesistest.data.DateMapper
 import com.takeiteasy.vip.genesistest.data.MoviesRepositoryImpl
 import com.takeiteasy.vip.genesistest.domain.api.Api
 import com.takeiteasy.vip.genesistest.domain.repository.MoviesRepository
@@ -12,8 +13,13 @@ import dagger.Provides
 @Module
 class MoviesModule {
     @Provides
-    fun provideMoviesRepository(api: Api): MoviesRepository {
-        return MoviesRepositoryImpl(api)
+    fun provideDateMapper(): DateMapper {
+        return DateMapper()
+    }
+
+    @Provides
+    fun provideMoviesRepository(api: Api, mapper: DateMapper): MoviesRepository {
+        return MoviesRepositoryImpl(api, mapper)
     }
 
     @Provides
