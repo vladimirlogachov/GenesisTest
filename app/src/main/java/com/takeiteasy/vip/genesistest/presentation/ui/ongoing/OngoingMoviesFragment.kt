@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,12 +39,30 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
         super.onViewCreated(view, savedInstanceState)
 
         adapter = OngoingMoviesAdapter(this)
+
+        val layoutManager = LinearLayoutManager(context)
         ongoingMovies.adapter = adapter
-        ongoingMovies.layoutManager = LinearLayoutManager(context)
+        ongoingMovies.layoutManager = layoutManager
+
+        ongoingMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                if (!adapter.isPageLoading() && !adapter.isLastPageLoaded()) {
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                            && firstVisibleItemPosition >= 0
+                            && totalItemCount >= adapter.getPageSize()) {
+                        loadOngoingMoviesForTwoWeeks(adapter.nextPage())
+                    }
+                }
+            }
+        })
 
         swipeRefresher.setOnRefreshListener(this)
 
-        loadOngoingMoviesForTwoWeeks(1)
+        loadOngoingMoviesForTwoWeeks(adapter.nextPage())
     }
 
     private fun loadOngoingMoviesForTwoWeeks(page: Int) {
@@ -67,11 +86,12 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
 
     override fun onRefresh() {
         adapter.refresh()
-        loadOngoingMoviesForTwoWeeks(1)
+        loadOngoingMoviesForTwoWeeks(adapter.nextPage())
     }
 
     override fun showMovies(movies: List<Movie>, page: Int, pageSize: Int, isLastPage: Boolean) {
         adapter.updateData(movies)
+        adapter.updatePagingInfo(page, pageSize, isLastPage)
     }
 
     override fun notifyMovieAddedToFavorite() {
@@ -79,7 +99,11 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
     }
 
     override fun showProgress(show: Boolean) {
-        swipeRefresher.isRefreshing = show
+        if (adapter.isPageLoading()) {
+            adapter.showPageLoading(show)
+        } else {
+            swipeRefresher.isRefreshing = show
+        }
     }
 
     override fun showError(error: String) {

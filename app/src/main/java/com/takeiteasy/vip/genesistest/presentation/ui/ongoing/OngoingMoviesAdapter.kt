@@ -6,31 +6,33 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.takeiteasy.vip.genesistest.R
 import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.presentation.common.GenericAdapter
+import com.takeiteasy.vip.genesistest.presentation.common.GenericPagingAdapter
 import com.takeiteasy.vip.genesistest.presentation.common.Shareable
 import kotlinx.android.synthetic.main.view_ongoing_item.view.*
 
 class OngoingMoviesAdapter(
         val interactionsListener: OngoingMoviesInteractionsListener
-) : GenericAdapter<Movie>() {
+) : GenericPagingAdapter<Movie>() {
 
     companion object {
         const val EMPTY = 0
         const val ONGOING = 1
+        const val LOADING = 2
     }
 
     override fun provideViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ONGOING -> OngoingMovieViewHolder(inflateView(parent, R.layout.view_ongoing_item))
-            else -> EmptyStateViewHolder(inflateView(parent, R.layout.view_empty))
+            EMPTY -> EmptyStateViewHolder(inflateView(parent, R.layout.view_empty))
+            else -> PageLoadingViewHolder(inflateView(parent, R.layout.view_page_loading))
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (isEmpty()) {
-            EMPTY
-        } else {
-            ONGOING
+        return when {
+            isEmpty() -> EMPTY
+            isLastPageLoaded() && position == itemCount - 1 -> LOADING
+            else -> ONGOING
         }
     }
 
