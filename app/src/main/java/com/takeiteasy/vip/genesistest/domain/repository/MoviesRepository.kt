@@ -4,6 +4,7 @@ import com.takeiteasy.vip.genesistest.domain.model.Movie
 import com.takeiteasy.vip.genesistest.domain.model.PagingData
 import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
 import java.util.*
 
 interface MoviesRepository {
@@ -12,4 +13,5 @@ interface MoviesRepository {
     fun addMovieToFavorite(id: Int): Completable
     fun removeMovieFromFavorite(id: Int): Completable
     fun loadFavoriteMovies(): Single<List<Movie>>
+    fun subscribeOnFavoriteMoviesChanges(): BehaviorSubject<Boolean>
 }

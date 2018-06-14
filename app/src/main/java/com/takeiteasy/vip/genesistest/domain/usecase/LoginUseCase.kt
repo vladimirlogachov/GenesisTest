@@ -12,7 +12,9 @@ class LoginUseCase(
         repository.handleResult(requestCode, resultCode, data)
     }
 
-    fun isLoggedIn(): Single<Boolean> = repository.isLoggedIn()
+    fun isLoggedIn(): Single<Boolean>
+            = repository.isLoggedIn()
 
-    fun registerCallback(): Completable = repository.registerProfileCallback()
+    fun registerCallback(): Completable
+            = repository.registerProfileCallback()
 }

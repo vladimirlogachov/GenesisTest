@@ -10,7 +10,9 @@ import java.util.*
 class OngoingMoviesUseCase(
         private val repository: MoviesRepository
 ) {
-    fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int): Single<PagingData<Movie>> = repository.loadOngoingMovies(releaseDateGte, releaseDateLte, page)
+    fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int): Single<PagingData<Movie>>
+            = repository.loadOngoingMovies(releaseDateGte, releaseDateLte, page)
 
-    fun addMovieToFavorite(id: Int): Completable = repository.addMovieToFavorite(id)
+    fun addMovieToFavorite(id: Int): Completable
+            = repository.addMovieToFavorite(id)
 }

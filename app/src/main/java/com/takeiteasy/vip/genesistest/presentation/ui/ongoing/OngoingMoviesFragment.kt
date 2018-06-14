@@ -23,6 +23,7 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
         SwipeRefreshLayout.OnRefreshListener, OngoingMoviesAdapter.OngoingMoviesInteractionsListener {
 
     companion object {
+        @JvmStatic
         fun newInstance() = OngoingMoviesFragment()
     }
 
@@ -53,7 +54,6 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
                 if (!adapter.isPageLoading() && !adapter.isLastPageLoaded()) {
-                    Log.d("PAGIING", "isLoading ? ${adapter.isPageLoading()}, isLastPage ? ${adapter.isLastPageLoaded()}")
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= adapter.getPageSize()) {
@@ -97,10 +97,6 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
         adapter.updatePagingInfo(page, pageSize, isLastPage)
     }
 
-    override fun notifyMovieAddedToFavorite() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun showPageLoading(show: Boolean) {
         ongoingMovies.post { adapter.showPageLoading(show) }
     }
@@ -114,7 +110,7 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
     }
 
     override fun addMovieToFavorite(movie: Movie) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        presenter.addMovieToFavorite(movie.id)
     }
 
     override fun share(text: String) {

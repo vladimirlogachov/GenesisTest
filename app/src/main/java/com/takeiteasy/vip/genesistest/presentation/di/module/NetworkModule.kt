@@ -1,7 +1,9 @@
 package com.takeiteasy.vip.genesistest.presentation.di.module
 
 import com.takeiteasy.vip.genesistest.BuildConfig
+import com.takeiteasy.vip.genesistest.data.NetworkManagerImpl
 import com.takeiteasy.vip.genesistest.domain.api.Api
+import com.takeiteasy.vip.genesistest.domain.network.NetworkManager
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -40,5 +42,10 @@ class NetworkModule {
     @Provides
     fun provideApi(retrofit: Retrofit): Api {
         return retrofit.create(Api::class.java)
+    }
+
+    @Provides
+    fun provideNetworkManager(): NetworkManager {
+        return NetworkManagerImpl()
     }
 }

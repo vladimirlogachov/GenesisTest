@@ -7,5 +7,6 @@ import io.reactivex.Single
 class ProfileUseCase(
         private val profileRepository: ProfileRepository
 ) {
-    fun loadUser(): Single<Profile> = profileRepository.loadUserProfile()
+    fun loadUser(): Single<Profile>
+            = profileRepository.loadUserProfile()
 }

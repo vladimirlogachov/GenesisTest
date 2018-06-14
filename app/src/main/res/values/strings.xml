@@ -8,6 +8,7 @@
     <string name="no_data">There is no available data loaded.</string>
     <string name="share">Share</string>
     <string name="add_to_favorite">Add to favorite</string>
+    <string name="remove_from_favorite">Remove</string>
 
     <array name="PageTitles">
         <item>Ongoing</item>

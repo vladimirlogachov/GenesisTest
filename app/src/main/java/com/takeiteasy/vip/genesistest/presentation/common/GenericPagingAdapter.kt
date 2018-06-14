@@ -28,6 +28,11 @@ abstract class GenericPagingAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewH
         this.isLastPageLoaded = isLastPageLoaded
     }
 
+    fun removeItem(position: Int) {
+        data.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     fun getSize(): Int = data.size
 
     fun isEmpty(): Boolean = data.isEmpty()

@@ -9,7 +9,6 @@ interface OngoingMoviesContract {
     interface OngoingMoviesView : IView {
         fun showMovies(movies: List<Movie>, page: Int, pageSize: Int, isLastPage: Boolean)
         fun showPageLoading(show: Boolean)
-        fun notifyMovieAddedToFavorite()
     }
 
     interface OngoingMoviesPresenter : IPresenter<OngoingMoviesView> {

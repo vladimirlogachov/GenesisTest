@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 @Dao
 interface MovieDaoImpl : MovieDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertOrUpdate(movies: List<MovieEntity>)
 
     @Query("UPDATE movies SET favorite = 1 WHERE id = :id")
@@ -19,6 +19,6 @@ interface MovieDaoImpl : MovieDao {
     @Query("SELECT * FROM movies WHERE favorite = 1")
     fun findFavoriteMovies(): Single<List<MovieEntity>>
 
-    @Query("SELECT * FROM movies ORDER BY id DESC")
+    @Query("SELECT * FROM movies ORDER BY id ASC")
     fun getAllMovies(): Single<List<MovieEntity>>
 }

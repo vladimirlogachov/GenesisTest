@@ -12,6 +12,8 @@ import java.util.*
 class OngoingMoviesPresenterImpl(
         private val useCase: OngoingMoviesUseCase
 ) : Presenter<OngoingMoviesContract.OngoingMoviesView>(), OngoingMoviesContract.OngoingMoviesPresenter {
+
+
     override fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int) {
         disposable.add(
                 useCase.loadOngoingMovies(releaseDateGte, releaseDateLte, page)

@@ -15,7 +15,7 @@ data class MovieEntity(
         @ColumnInfo(name = "release_date")
         val releaseDate: String,
         @ColumnInfo(name = "poste_path")
-        val posterPath: String,
+        val posterPath: String?,
         @ColumnInfo(name = "favorite")
         val isFavorite: Boolean
 )
