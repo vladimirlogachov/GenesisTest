@@ -2,6 +2,7 @@ package com.takeiteasy.vip.genesistest.presentation.common
 
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +18,8 @@ abstract class GenericPagingAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewH
     abstract fun provideViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
     fun updateData(data: List<T>) {
-        val prevSize = data.size
         this.data.addAll(data)
-        notifyItemRangeInserted(prevSize, data.size)
+        notifyDataSetChanged()
     }
 
     fun updatePagingInfo(page: Int, pageSize: Int, isLastPageLoaded: Boolean) {
@@ -27,6 +27,8 @@ abstract class GenericPagingAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewH
         this.pageSize = pageSize
         this.isLastPageLoaded = isLastPageLoaded
     }
+
+    fun getSize(): Int = data.size
 
     fun isEmpty(): Boolean = data.isEmpty()
 
@@ -40,19 +42,21 @@ abstract class GenericPagingAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewH
 
     fun refresh() {
         data.clear()
-        page = 1
+        page = 0
         pageSize = 0
-        isLastPageLoaded = false
+        isLastPageLoaded = true
         isPageLoading = false
+        notifyDataSetChanged()
     }
 
     fun showPageLoading(show: Boolean) {
+        Log.d("PAGIING", "showPageLoading() ? $show")
         isPageLoading = show
 
         if (isPageLoading) {
             notifyItemInserted(data.size)
         } else {
-            notifyItemRemoved(data.size)
+            notifyItemRemoved(data.size - 1)
         }
     }
 

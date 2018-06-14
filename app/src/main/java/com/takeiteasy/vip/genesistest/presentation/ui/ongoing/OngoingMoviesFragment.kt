@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,8 @@ import kotlinx.android.synthetic.main.fragment_ongoing_movies.*
 import java.util.*
 import javax.inject.Inject
 
-class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesView, SwipeRefreshLayout.OnRefreshListener, OngoingMoviesAdapter.OngoingMoviesInteractionsListener {
+class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesView,
+        SwipeRefreshLayout.OnRefreshListener, OngoingMoviesAdapter.OngoingMoviesInteractionsListener {
 
     companion object {
         fun newInstance() = OngoingMoviesFragment()
@@ -51,6 +53,7 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
                 if (!adapter.isPageLoading() && !adapter.isLastPageLoaded()) {
+                    Log.d("PAGIING", "isLoading ? ${adapter.isPageLoading()}, isLastPage ? ${adapter.isLastPageLoaded()}")
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= adapter.getPageSize()) {
@@ -98,12 +101,12 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun showPageLoading(show: Boolean) {
+        ongoingMovies.post { adapter.showPageLoading(show) }
+    }
+
     override fun showProgress(show: Boolean) {
-        if (adapter.isPageLoading()) {
-            adapter.showPageLoading(show)
-        } else {
-            swipeRefresher.isRefreshing = show
-        }
+        swipeRefresher.isRefreshing = show
     }
 
     override fun showError(error: String) {

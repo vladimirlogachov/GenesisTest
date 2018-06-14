@@ -17,8 +17,20 @@ class OngoingMoviesPresenterImpl(
                 useCase.loadOngoingMovies(releaseDateGte, releaseDateLte, page)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSubscribe { getView()?.showProgress(true) }
-                        .doFinally { getView()?.showProgress(false) }
+                        .doOnSubscribe {
+                            if (page > 1) {
+                                getView()?.showPageLoading(true)
+                            } else {
+                                getView()?.showProgress(true)
+                            }
+                        }
+                        .doFinally {
+                            if (page > 1) {
+                                getView()?.showPageLoading(false)
+                            } else {
+                                getView()?.showProgress(false)
+                            }
+                        }
                         .subscribeWith(object : DisposableSingleObserver<PagingData<Movie>>() {
                             override fun onSuccess(t: PagingData<Movie>) {
                                 getView()?.showMovies(t.results, t.page, t.getPageSize(), t.isLastPage())
