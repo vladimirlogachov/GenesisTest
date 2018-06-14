@@ -14,6 +14,7 @@ import android.widget.Toast
 
 import com.takeiteasy.vip.genesistest.R
 import com.takeiteasy.vip.genesistest.domain.model.Movie
+import com.takeiteasy.vip.genesistest.presentation.router.ActivityRouter
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_ongoing_movies.*
 import java.util.*
@@ -29,6 +30,8 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
 
     @Inject
     lateinit var presenter: OngoingMoviesContract.OngoingMoviesPresenter
+    @Inject
+    lateinit var router: ActivityRouter
 
     lateinit var adapter: OngoingMoviesAdapter
 
@@ -114,6 +117,6 @@ class OngoingMoviesFragment : Fragment(), OngoingMoviesContract.OngoingMoviesVie
     }
 
     override fun share(text: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        router.requestSharing(context, text)
     }
 }

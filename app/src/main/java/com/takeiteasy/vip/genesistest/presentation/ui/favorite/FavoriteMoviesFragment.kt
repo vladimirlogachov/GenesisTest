@@ -12,6 +12,7 @@ import android.widget.Toast
 
 import com.takeiteasy.vip.genesistest.R
 import com.takeiteasy.vip.genesistest.domain.model.Movie
+import com.takeiteasy.vip.genesistest.presentation.router.ActivityRouter
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_favorite_movies.*
 import javax.inject.Inject
@@ -27,6 +28,8 @@ class FavoriteMoviesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
     @Inject
     lateinit var presenter: FavoriteMoviesContract.FavoriteMoviesPresenter
+    @Inject
+    lateinit var router: ActivityRouter
 
     lateinit var adapter: FavoriteMoviesAdapter
 
@@ -66,7 +69,7 @@ class FavoriteMoviesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     }
 
     override fun share(text: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        router.requestSharing(context, text)
     }
 
     override fun onRefresh() {
