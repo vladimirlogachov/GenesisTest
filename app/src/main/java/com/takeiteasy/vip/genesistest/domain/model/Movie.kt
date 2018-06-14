@@ -4,16 +4,19 @@ import com.google.gson.annotations.SerializedName
 import com.takeiteasy.vip.genesistest.BuildConfig
 import java.util.*
 
-private const val NEXT_LINE: String = "\n"
-
 data class Movie(
         val id: Int,
         val title: String,
         val overview: String,
-        val releaseDate: Date,
+        val releaseDate: String,
         @SerializedName("poster_path")
-        private val posterPath: String
+        val posterPath: String,
+        val isFavorite: Boolean
 ) {
+    companion object {
+        const val NEXT_LINE: String = "\n"
+    }
+
     fun getPosterUrl(): String {
         return BuildConfig.MOVIES_IMAGE_DB_BASE_URL + posterPath
     }

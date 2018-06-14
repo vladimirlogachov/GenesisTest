@@ -14,6 +14,6 @@ interface OngoingMoviesContract {
 
     interface OngoingMoviesPresenter : IPresenter<OngoingMoviesView> {
         fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int)
-        fun addMovieToFavorite(movie: Movie)
+        fun addMovieToFavorite(id: Int)
     }
 }

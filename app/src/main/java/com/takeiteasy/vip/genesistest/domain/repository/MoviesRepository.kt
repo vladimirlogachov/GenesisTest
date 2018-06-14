@@ -9,7 +9,7 @@ import java.util.*
 interface MoviesRepository {
     fun saveOngoingMovies(movies: List<Movie>): Completable
     fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int): Single<PagingData<Movie>>
-    fun addMovieToFavorite(movie: Movie): Completable
-    fun removeMovieFromFavorite(): Single<List<Movie>>
+    fun addMovieToFavorite(id: Int): Completable
+    fun removeMovieFromFavorite(id: Int): Completable
     fun loadFavoriteMovies(): Single<List<Movie>>
 }

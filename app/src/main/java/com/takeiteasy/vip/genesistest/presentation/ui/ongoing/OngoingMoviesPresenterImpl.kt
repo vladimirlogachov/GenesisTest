@@ -43,7 +43,12 @@ class OngoingMoviesPresenterImpl(
         )
     }
 
-    override fun addMovieToFavorite(movie: Movie) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun addMovieToFavorite(id: Int) {
+        disposable.add(
+                useCase.addMovieToFavorite(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+        )
     }
 }

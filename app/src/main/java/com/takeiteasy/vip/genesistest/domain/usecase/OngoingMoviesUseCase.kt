@@ -12,5 +12,5 @@ class OngoingMoviesUseCase(
 ) {
     fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int): Single<PagingData<Movie>> = repository.loadOngoingMovies(releaseDateGte, releaseDateLte, page)
 
-    fun addMovieToFavorite(movie: Movie): Completable = repository.addMovieToFavorite(movie)
+    fun addMovieToFavorite(id: Int): Completable = repository.addMovieToFavorite(id)
 }

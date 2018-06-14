@@ -10,27 +10,36 @@ import java.util.*
 
 class MoviesRepositoryImpl(
         private val api: Api,
-        private val mapper: DateMapper
+        private val dateMapper: DateMapper,
+        private val movieDao: MovieDaoImpl,
+        private val moviesMapper: MoviesMapper
 ) : MoviesRepository {
 
-    override fun saveOngoingMovies(movies: List<Movie>): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun mapMoviesToEntities(movies: List<Movie>): List<MovieEntity> {
+        val entities = mutableListOf<MovieEntity>()
+
+        for (movie in movies) {
+            entities.add(moviesMapper.toEntity(movie))
+        }
+
+        return entities
     }
+
+    override fun saveOngoingMovies(movies: List<Movie>): Completable
+            = Completable.fromAction {
+        movieDao.insertOrUpdate(mapMoviesToEntities(movies)) }
 
     override fun loadOngoingMovies(releaseDateGte: Date, releaseDateLte: Date, page: Int): Single<PagingData<Movie>> {
-        return api.loadOngoingMovies(mapper.toModel(releaseDateGte), mapper.toModel(releaseDateLte), page)
+        return api.loadOngoingMovies(dateMapper.toModel(releaseDateGte), dateMapper.toModel(releaseDateLte), page)
     }
 
-    override fun addMovieToFavorite(movie: Movie): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun addMovieToFavorite(id: Int): Completable
+            = Completable.fromAction{ movieDao.addToFavorite(id) }
 
-    override fun removeMovieFromFavorite(): Single<List<Movie>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun removeMovieFromFavorite(id: Int): Completable
+            = Completable.fromAction{ movieDao.removeFromFavorite(id) }
 
-    override fun loadFavoriteMovies(): Single<List<Movie>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun loadFavoriteMovies(): Single<List<Movie>>
+            = movieDao.findFavoriteMovies().map { it.map(moviesMapper::toModel) }
 
 }
