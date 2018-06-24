@@ -1,13 +1,16 @@
 package com.takeiteasy.vip.genesistest.presentation.di.module
 
 import com.takeiteasy.vip.genesistest.App
-import com.takeiteasy.vip.genesistest.data.*
-import com.takeiteasy.vip.genesistest.domain.api.Api
-import com.takeiteasy.vip.genesistest.domain.db.MovieDao
-import com.takeiteasy.vip.genesistest.domain.network.NetworkManager
-import com.takeiteasy.vip.genesistest.domain.repository.MoviesRepository
-import com.takeiteasy.vip.genesistest.domain.usecase.FavoriteMoviesUseCase
-import com.takeiteasy.vip.genesistest.domain.usecase.OngoingMoviesUseCase
+import com.takeiteasy.vip.genesistest.data.db.dao.MovieDaoImpl
+import com.takeiteasy.vip.genesistest.data.db.createMovieDao
+import com.takeiteasy.vip.genesistest.data.network.Api
+import com.takeiteasy.vip.genesistest.data.network.utils.NetworkManager
+import com.takeiteasy.vip.genesistest.data.repository.MoviesRepositoryImpl
+import com.takeiteasy.vip.genesistest.data.repository.contract.MoviesRepository
+import com.takeiteasy.vip.genesistest.data.repository.mapper.DateMapper
+import com.takeiteasy.vip.genesistest.data.repository.mapper.MoviesMapper
+import com.takeiteasy.vip.genesistest.usecase.FavoriteMoviesUseCase
+import com.takeiteasy.vip.genesistest.usecase.OngoingMoviesUseCase
 import com.takeiteasy.vip.genesistest.presentation.ui.favorite.FavoriteMoviesContract
 import com.takeiteasy.vip.genesistest.presentation.ui.favorite.FavoriteMoviesPresenterImpl
 import com.takeiteasy.vip.genesistest.presentation.ui.ongoing.OngoingMoviesContract

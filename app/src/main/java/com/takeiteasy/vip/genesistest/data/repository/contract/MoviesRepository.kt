@@ -1,7 +1,7 @@
-package com.takeiteasy.vip.genesistest.domain.repository
+package com.takeiteasy.vip.genesistest.data.repository.contract
 
-import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.domain.model.PagingData
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.PagingData
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject

@@ -1,6 +1,6 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.favorite
 
-import com.takeiteasy.vip.genesistest.domain.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
 import com.takeiteasy.vip.genesistest.presentation.mvp.IPresenter
 import com.takeiteasy.vip.genesistest.presentation.mvp.IView
 

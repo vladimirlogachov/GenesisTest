@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.domain.model
+package com.takeiteasy.vip.genesistest.data.network.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,8 +1,10 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.db.dao
 
-import android.arch.persistence.room.*
-import com.takeiteasy.vip.genesistest.domain.db.MovieDao
-import io.reactivex.Maybe
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.Query
+import com.takeiteasy.vip.genesistest.data.db.entity.MovieEntity
 import io.reactivex.Single
 
 @Dao

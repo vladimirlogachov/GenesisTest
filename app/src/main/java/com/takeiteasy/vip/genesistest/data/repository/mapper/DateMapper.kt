@@ -1,6 +1,5 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.repository.mapper
 
-import com.takeiteasy.vip.genesistest.domain.repository.Mapper
 import java.text.SimpleDateFormat
 import java.util.*
 

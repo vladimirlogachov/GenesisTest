@@ -1,6 +1,5 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.network.utils
 
-import com.takeiteasy.vip.genesistest.domain.network.NetworkManager
 import java.io.IOException
 
 class NetworkManagerImpl : NetworkManager {
@@ -18,7 +17,6 @@ class NetworkManagerImpl : NetworkManager {
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
-
 
         return false
     }

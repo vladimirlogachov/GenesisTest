@@ -1,9 +1,9 @@
 package com.takeiteasy.vip.genesistest.presentation.di.module
 
 import com.takeiteasy.vip.genesistest.BuildConfig
-import com.takeiteasy.vip.genesistest.data.NetworkManagerImpl
-import com.takeiteasy.vip.genesistest.domain.api.Api
-import com.takeiteasy.vip.genesistest.domain.network.NetworkManager
+import com.takeiteasy.vip.genesistest.data.network.utils.NetworkManagerImpl
+import com.takeiteasy.vip.genesistest.data.network.Api
+import com.takeiteasy.vip.genesistest.data.network.utils.NetworkManager
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

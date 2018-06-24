@@ -11,10 +11,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.takeiteasy.vip.genesistest.R
-import com.takeiteasy.vip.genesistest.domain.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
 import com.takeiteasy.vip.genesistest.presentation.router.ActivityRouter
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_favorite_movies.*
 import javax.inject.Inject
 
 

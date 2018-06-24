@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.domain.repository
+package com.takeiteasy.vip.genesistest.data.repository.mapper
 
 interface Mapper<E, M> {
     fun toModel(entity: E): M

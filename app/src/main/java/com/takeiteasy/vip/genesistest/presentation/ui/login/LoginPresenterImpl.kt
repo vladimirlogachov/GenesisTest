@@ -1,7 +1,7 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.login
 
 import android.content.Intent
-import com.takeiteasy.vip.genesistest.domain.usecase.LoginUseCase
+import com.takeiteasy.vip.genesistest.usecase.LoginUseCase
 import com.takeiteasy.vip.genesistest.presentation.mvp.Presenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableCompletableObserver
