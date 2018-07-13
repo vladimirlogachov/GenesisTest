@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.domain.repository
+package com.takeiteasy.vip.genesistest.data.repository.contract
 
 import android.content.Intent
 import io.reactivex.Completable

@@ -1,10 +1,14 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.repository
 
-import com.takeiteasy.vip.genesistest.domain.api.Api
-import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.domain.model.PagingData
-import com.takeiteasy.vip.genesistest.domain.network.NetworkManager
-import com.takeiteasy.vip.genesistest.domain.repository.MoviesRepository
+import com.takeiteasy.vip.genesistest.data.repository.mapper.DateMapper
+import com.takeiteasy.vip.genesistest.data.db.dao.MovieDaoImpl
+import com.takeiteasy.vip.genesistest.data.db.entity.MovieEntity
+import com.takeiteasy.vip.genesistest.data.repository.mapper.MoviesMapper
+import com.takeiteasy.vip.genesistest.data.network.Api
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.PagingData
+import com.takeiteasy.vip.genesistest.data.network.utils.NetworkManager
+import com.takeiteasy.vip.genesistest.data.repository.contract.MoviesRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
@@ -43,7 +47,9 @@ class MoviesRepositoryImpl(
               api.loadOngoingMovies(dateMapper.toModel(releaseDateGte), dateMapper.toModel(releaseDateLte), page)
                         .doOnSuccess { movieDao.insertOrUpdate(mapMoviesToEntities(it.results)) }
             } else {
-                movieDao.getAllMovies().map { it.map(moviesMapper::toModel) }.map { PagingData(1, it.size, 1, it) }
+                movieDao.getAllMovies()
+                        .map { it.map(moviesMapper::toModel) }
+                        .map { PagingData(1, it.size, 1, it) }
             }
     }
 
@@ -55,7 +61,8 @@ class MoviesRepositoryImpl(
             = Completable.fromAction{ movieDao.removeFromFavorite(id) }
 
     override fun loadFavoriteMovies(): Single<List<Movie>>
-            = movieDao.findFavoriteMovies().map { it.map(moviesMapper::toModel) }
-            .doOnSuccess { isReloadRequired.onNext(false) }
+            = movieDao.findFavoriteMovies()
+                .map { it.map(moviesMapper::toModel) }
+                .doOnSuccess { isReloadRequired.onNext(false) }
 
 }

@@ -1,7 +1,7 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.movie
 
 import com.facebook.Profile
-import com.takeiteasy.vip.genesistest.domain.usecase.ProfileUseCase
+import com.takeiteasy.vip.genesistest.usecase.ProfileUseCase
 import com.takeiteasy.vip.genesistest.presentation.mvp.Presenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver

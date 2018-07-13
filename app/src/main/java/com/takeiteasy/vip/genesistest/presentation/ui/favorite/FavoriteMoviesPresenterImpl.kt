@@ -1,10 +1,8 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.favorite
 
-import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.domain.usecase.FavoriteMoviesUseCase
+import com.takeiteasy.vip.genesistest.usecase.FavoriteMoviesUseCase
 import com.takeiteasy.vip.genesistest.presentation.mvp.Presenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
 class FavoriteMoviesPresenterImpl(
@@ -15,7 +13,11 @@ class FavoriteMoviesPresenterImpl(
                 useCase.subscribeOnChanges()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { if (it) getView()?.notifyFavoriteListChanged() }
+                        //todo: onError is always should be handled to prevent error hiding
+                        .subscribe (
+                                { if (it) getView()?.notifyFavoriteListChanged() },
+                                { e -> e.printStackTrace() }
+                        )
         )
     }
 
@@ -24,27 +26,28 @@ class FavoriteMoviesPresenterImpl(
                 useCase.loadFavoriteMovies()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
+                        //cool way to handle progress
                         .doOnSubscribe { getView()?.showProgress(true) }
                         .doFinally { getView()?.showProgress(false) }
-                        .subscribeWith(object : DisposableSingleObserver<List<Movie>>() {
-                            override fun onSuccess(t: List<Movie>) {
-                                getView()?.showMovies(t)
-                            }
-
-                            override fun onError(e: Throwable) {
-                                getView()?.showError(e.localizedMessage)
-                            }
-                        })
+                        //consider the approach below. it looks more straightforward and concise
+                        .subscribe (
+                            { movies -> getView()?.showMovies(movies)},
+                            { error -> getView()?.showError(error.localizedMessage) }
+                        )
         )
     }
 
     override fun removeMovieFromFavorite(id: Int) {
+
         disposable.add(
                 useCase.removeMovieFromFavorite(id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
+                        //todo: onError is always should be handled to prevent error hiding
+                        .subscribe(
+                                {},
+                                { e -> e.printStackTrace() }
+                        )
         )
     }
-
 }

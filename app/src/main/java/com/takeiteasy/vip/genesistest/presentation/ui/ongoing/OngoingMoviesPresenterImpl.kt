@@ -1,8 +1,8 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.ongoing
 
-import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.domain.model.PagingData
-import com.takeiteasy.vip.genesistest.domain.usecase.OngoingMoviesUseCase
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.PagingData
+import com.takeiteasy.vip.genesistest.usecase.OngoingMoviesUseCase
 import com.takeiteasy.vip.genesistest.presentation.mvp.Presenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver

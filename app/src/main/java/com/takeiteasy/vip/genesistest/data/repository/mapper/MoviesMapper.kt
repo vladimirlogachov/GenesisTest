@@ -1,7 +1,7 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.repository.mapper
 
-import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.domain.repository.Mapper
+import com.takeiteasy.vip.genesistest.data.db.entity.MovieEntity
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
 
 class MoviesMapper : Mapper<MovieEntity, Movie> {
     override fun toModel(entity: MovieEntity): Movie {

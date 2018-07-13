@@ -6,17 +6,15 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 
 import com.takeiteasy.vip.genesistest.R
-import com.takeiteasy.vip.genesistest.domain.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
 import com.takeiteasy.vip.genesistest.presentation.router.ActivityRouter
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_ongoing_movies.*
 import java.util.*
 import javax.inject.Inject
 

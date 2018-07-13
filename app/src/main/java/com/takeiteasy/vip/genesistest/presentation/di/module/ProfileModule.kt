@@ -1,8 +1,8 @@
 package com.takeiteasy.vip.genesistest.presentation.di.module
 
-import com.takeiteasy.vip.genesistest.data.ProfileRepositoryImpl
-import com.takeiteasy.vip.genesistest.domain.repository.ProfileRepository
-import com.takeiteasy.vip.genesistest.domain.usecase.ProfileUseCase
+import com.takeiteasy.vip.genesistest.data.repository.ProfileRepositoryImpl
+import com.takeiteasy.vip.genesistest.data.repository.contract.ProfileRepository
+import com.takeiteasy.vip.genesistest.usecase.ProfileUseCase
 import com.takeiteasy.vip.genesistest.presentation.ui.movie.ProfileContract
 import com.takeiteasy.vip.genesistest.presentation.ui.movie.ProfilePresenterImpl
 import dagger.Module

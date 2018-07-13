@@ -1,7 +1,7 @@
-package com.takeiteasy.vip.genesistest.domain.usecase
+package com.takeiteasy.vip.genesistest.usecase
 
 import android.content.Intent
-import com.takeiteasy.vip.genesistest.domain.repository.LoginRepository
+import com.takeiteasy.vip.genesistest.data.repository.contract.LoginRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 

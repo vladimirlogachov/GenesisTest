@@ -1,6 +1,6 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.ongoing
 
-import com.takeiteasy.vip.genesistest.domain.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
 import com.takeiteasy.vip.genesistest.presentation.mvp.IPresenter
 import com.takeiteasy.vip.genesistest.presentation.mvp.IView
 import java.util.*

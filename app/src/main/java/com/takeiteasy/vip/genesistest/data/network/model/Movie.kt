@@ -1,8 +1,7 @@
-package com.takeiteasy.vip.genesistest.domain.model
+package com.takeiteasy.vip.genesistest.data.network.model
 
 import com.google.gson.annotations.SerializedName
 import com.takeiteasy.vip.genesistest.BuildConfig
-import java.util.*
 
 data class Movie(
         val id: Int,

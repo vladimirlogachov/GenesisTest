@@ -1,15 +1,13 @@
 package com.takeiteasy.vip.genesistest.presentation.ui.ongoing
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.takeiteasy.vip.genesistest.R
-import com.takeiteasy.vip.genesistest.domain.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
 import com.takeiteasy.vip.genesistest.presentation.common.GenericPagingAdapter
 import com.takeiteasy.vip.genesistest.presentation.common.Shareable
-import kotlinx.android.synthetic.main.view_ongoing_item.view.*
 
 class OngoingMoviesAdapter(
         val interactionsListener: OngoingMoviesInteractionsListener

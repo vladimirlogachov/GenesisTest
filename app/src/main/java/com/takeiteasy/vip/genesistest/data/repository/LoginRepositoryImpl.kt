@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.repository
 
 import android.content.Intent
 import com.facebook.CallbackManager
@@ -7,7 +7,7 @@ import com.facebook.FacebookException
 import com.facebook.Profile
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.takeiteasy.vip.genesistest.domain.repository.LoginRepository
+import com.takeiteasy.vip.genesistest.data.repository.contract.LoginRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.SingleEmitter

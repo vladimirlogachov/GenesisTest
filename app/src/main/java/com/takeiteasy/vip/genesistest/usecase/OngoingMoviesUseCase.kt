@@ -1,8 +1,8 @@
-package com.takeiteasy.vip.genesistest.domain.usecase
+package com.takeiteasy.vip.genesistest.usecase
 
-import com.takeiteasy.vip.genesistest.domain.model.Movie
-import com.takeiteasy.vip.genesistest.domain.model.PagingData
-import com.takeiteasy.vip.genesistest.domain.repository.MoviesRepository
+import com.takeiteasy.vip.genesistest.data.network.model.Movie
+import com.takeiteasy.vip.genesistest.data.network.model.PagingData
+import com.takeiteasy.vip.genesistest.data.repository.contract.MoviesRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 import java.util.*

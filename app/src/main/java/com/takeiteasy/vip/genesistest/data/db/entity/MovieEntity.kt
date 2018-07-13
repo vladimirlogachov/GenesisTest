@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.db.entity
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity

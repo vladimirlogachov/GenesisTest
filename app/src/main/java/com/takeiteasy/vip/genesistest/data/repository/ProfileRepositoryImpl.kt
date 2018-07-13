@@ -1,7 +1,7 @@
-package com.takeiteasy.vip.genesistest.data
+package com.takeiteasy.vip.genesistest.data.repository
 
 import com.facebook.Profile
-import com.takeiteasy.vip.genesistest.domain.repository.ProfileRepository
+import com.takeiteasy.vip.genesistest.data.repository.contract.ProfileRepository
 import io.reactivex.Single
 
 class ProfileRepositoryImpl : ProfileRepository {

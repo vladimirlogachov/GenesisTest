@@ -1,4 +1,4 @@
-package com.takeiteasy.vip.genesistest.domain.repository
+package com.takeiteasy.vip.genesistest.data.repository.contract
 
 import com.facebook.Profile
 import io.reactivex.Single
